@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+
+# env / secrets (keep .env.example tracked)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# runtime / coverage / build
+coverage/
+dist/
+build/
+.tmp/
+temp/
+uploads/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.pem
