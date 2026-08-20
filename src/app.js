@@ -6,6 +6,7 @@ const apiRoutes = require('./routes');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const { configureCloudinary } = require('./config/cloudinary');
 const { isResendMuted, isCloudinaryMuted } = require('./utils/externalMute');
+const { createCorsOriginChecker } = require('./utils/corsOrigins');
 
 function createApp() {
   const app = express();
@@ -18,10 +19,9 @@ function createApp() {
     })
   );
 
-  const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
   app.use(
     cors({
-      origin: corsOrigin.split(',').map((o) => o.trim()),
+      origin: createCorsOriginChecker(),
       credentials: true,
     })
   );

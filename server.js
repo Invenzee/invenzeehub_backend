@@ -5,15 +5,18 @@ const { Server } = require('socket.io');
 const connectDB = require('./src/config/db');
 const createApp = require('./src/app');
 const { init: initSocket } = require('./src/socket');
+const { parseCorsOrigins } = require('./src/utils/corsOrigins');
 
 const PORT = process.env.PORT || 5000;
 const app = createApp();
 const server = http.createServer(app);
 
-const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const allowedOrigins = parseCorsOrigins(process.env.CORS_ORIGIN);
+console.log(`[CORS] allowed origins: ${allowedOrigins.join(', ')}`);
+
 const io = new Server(server, {
   cors: {
-    origin: corsOrigin.split(',').map((o) => o.trim()),
+    origin: allowedOrigins,
     credentials: true,
   },
 });
