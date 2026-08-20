@@ -23,7 +23,8 @@ initSocket(io);
 async function start() {
   await connectDB();
 
-  server.listen(PORT, () => {
+  // Bind 0.0.0.0 so Dokploy/Traefik can reach the container over IPv4
+  server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
   });
 }
